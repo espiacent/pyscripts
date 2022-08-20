@@ -3,9 +3,9 @@
 import subprocess
 import pyperclip
 import os
+import getpass
 
-
-path = "/Users/chris/Desktop/new_dl"
+path = f'/Users/{getpass.getuser()}/Desktop/new_dl'
 try:
     os.mkdir(path)
 except Exception:
@@ -14,11 +14,8 @@ except Exception:
 finally:
     inp = '"' + pyperclip.paste().replace('\n', '" "') + '"'
 
-    pyperclip.copy(
-        f'aria2c -x 16 -s 16 -Z {inp} --dir="/Users/chris/Desktop/new_dl"')
-
     run = subprocess.run(
-        f'aria2c -x 16 -s 16 -Z {inp} --dir="/Users/chris/Desktop/new_dl"',
+        f'aria2c -x 16 -s 16 -Z {inp} --dir="{path}"',
         shell=True, check=True)
 
     print(run.returncode)
